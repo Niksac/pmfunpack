@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js" integrity="sha512-Qlv6VSKh1gDKGoJbnyA5RMXYcvnpIqhO++MhIM2fStMcGT9i2T//tSwYFlcyoRRDcDZ+TYHpH8azBBCyhpSeqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>PMF Unpack</title>
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #f8f8f8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            line-height: 1.8;
+            position: relative;
+        }
+        h1 {
+            color: #333366;
+        }
+        p {
+            color: #666666;
+            max-width: 80%;
+            text-align: center;
+        }
+        .upload-btn-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+        .btn {
+            border: 2px solid #666666;
+            color: #666666;
+            background-color: white;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .upload-btn-wrapper input[type=file] {
+            font-size: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>PMF Unpack</h1>
+    <p>Choose your PMF-file.<br />All files are processed locally and nothing is sent to any server.</p>
+    <div class="upload-btn-wrapper">
+        <button class="btn">Choose file</button>
+        <input type="file" name="myfile" id="fileInput" />
+    </div>
+    <p id="status"></p>
+    <script>
+        document.getElementById('fileInput').addEventListener('change', handleFileSelect);
+
+        async function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (!file) {
+                return;
+            }
+            
+            let name = await processFile();
+            document.getElementById('status').textContent = 'Lade ...';
+        }
+    </script>
+    <script src="app.js"></script>
+</body>
+</html>
